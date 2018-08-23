@@ -1,5 +1,10 @@
 <button (click)="callHttp()">Call Http</button>
-<textarea>
-  {{theResponse}}
-</textarea>
+<br/>
+<label>API 1 Response</label>
 <input type="text" [(ngModel)]=theResponse />
+<br/>
+<label>API 2 Response</label>
+<input type="text" [(ngModel)]=theResponse2 />
+<div>
+<img src="../../assets/Loading_icon_2.gif" *ngIf="showLoader" />
+</div>

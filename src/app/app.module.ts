@@ -10,7 +10,7 @@ import { HttpCallerComponent } from './http-caller/http-caller.component';
 import { httpFactory } from './httpFactory';
 import { HttpCallerNewComponent } from './http-caller-new/http-caller-new.component';
 import { HttpInterceptorNewService } from './services/http-interceptor-new.service';
-
+import { GlobalServiceService } from './global-service.service';
 
 @NgModule({
   declarations: [
@@ -26,13 +26,14 @@ import { HttpInterceptorNewService } from './services/http-interceptor-new.servi
     {
       provide: Http,
       useFactory: httpFactory,
-      deps: [XHRBackend,RequestOptions]
+      deps: [XHRBackend,RequestOptions, GlobalServiceService]
     },
     {
       provide:HTTP_INTERCEPTORS,
       useClass: HttpInterceptorNewService,
       multi: true
-    }
+    },
+    GlobalServiceService
   ],
   bootstrap: [AppComponent]
 })

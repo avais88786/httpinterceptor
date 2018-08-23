@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http, ConnectionBackend, Request, Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import {tap} from 'rxjs/operators';
+import { tap, delay } from 'rxjs/operators';
+import { GlobalServiceService } from '../global-service.service';
 
 @Injectable()
 export class HttpInterceptorService extends Http {
-
-  constructor(_backend: ConnectionBackend, _defaultOptions: RequestOptions) {
+  counter: number = 1;
+  globalService: GlobalServiceService;
+  constructor(_backend: ConnectionBackend, _defaultOptions: RequestOptions, globalServ: GlobalServiceService) {
     super(_backend, _defaultOptions);
+    this.globalService = globalServ;
   }
 
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
@@ -15,10 +18,22 @@ export class HttpInterceptorService extends Http {
   }
 
   get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    alert('calling');
-    return super.get(url, options).pipe(
-      tap(() => { alert('called old')})
-    );
+    this.globalService.setSpinner1Value(true);
+    if (url == 'https://jsonplaceholder.typicode.com/posts/1') {
+      return super.get(url, options).pipe(
+        delay(4000),
+        tap(() => {
+          this.globalService.setSpinner1Value(false);
+        })
+      );
+    } else {
+      return super.get(url, options).pipe(
+        delay(1000),
+        tap(() => {
+          this.globalService.setSpinner1Value(false);
+        })
+      );
+    }
   }
 
   post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
