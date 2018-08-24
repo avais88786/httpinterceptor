@@ -20,7 +20,8 @@ export class HttpCallerComponent implements OnInit {
   }
 
   callHttp() {
-    this.http.get('https://jsonplaceholder.typicode.com/posts/1')
+    //https://jsonplaceholder.typicode.com/posts/1
+    this.http.get('https://reqres.in/api/users/23')
       .subscribe(s => {
         this.theResponse = JSON.stringify(s.json())
       });
