@@ -11,16 +11,19 @@ import { httpFactory } from './httpFactory';
 import { HttpCallerNewComponent } from './http-caller-new/http-caller-new.component';
 import { HttpInterceptorNewService } from './services/http-interceptor-new.service';
 import { GlobalServiceService } from './global-service.service';
+import { AppRoutingModule } from './/app-routing.module';
+import { HttpCallerCloneComponent } from './http-caller-clone/http-caller-clone.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HttpCallerComponent,
-    HttpCallerNewComponent
+    HttpCallerNewComponent,
+    HttpCallerCloneComponent
   ],
   imports: [
     BrowserModule, HttpModule,
-    HttpClientModule,FormsModule
+    HttpClientModule,FormsModule, AppRoutingModule
   ],
   providers: [
     {

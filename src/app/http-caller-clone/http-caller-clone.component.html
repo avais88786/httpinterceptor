@@ -1,0 +1,11 @@
+<h2>This is Cloned Http Caller</h2>
+<button (click)="callHttp()">Call Http</button>
+<br/>
+<label>API 1 Response</label>
+<input style="background:red" type="text" [(ngModel)]=theResponse />
+<br/>
+<div>
+<img src="../../assets/Loading_icon_2.gif" *ngIf="showLoader" />
+</div>
+
+<button (click)="goBack()">Back</button>
